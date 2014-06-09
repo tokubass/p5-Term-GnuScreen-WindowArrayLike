@@ -45,15 +45,10 @@ sub insert {
     my $update_number = $start_number + 1;
     my $window_numbers_more_than_current = $self->window_numbers_more_than_current;
 
-    if ( $window_numbers_more_than_current->[0] > $update_number ) {
-        qx{ screen -X screen $update_number };
-        exit;
-    }else{
-        for my $win_number (reverse @$window_numbers_more_than_current) {
-            qx{ screen -X eval 'select $win_number' 'number +1' };
-        }
-        qx{ screen -X screen $update_number };
+    for my $win_number (reverse @$window_numbers_more_than_current) {
+        qx{ screen -X eval 'select $win_number' 'number +1' };
     }
+    qx{ screen -X screen $update_number };
 }
 
 sub compact {
