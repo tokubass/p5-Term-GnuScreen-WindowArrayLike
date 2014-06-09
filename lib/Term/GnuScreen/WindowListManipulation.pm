@@ -7,8 +7,10 @@ our $VERSION = "0.01";
 
 sub new {
     my $class = shift;
+    my $windows = qx{ screen -Q windows } or die "Your screen doesn't support -Q";
+
     bless {
-        windows => [split "\x20\x20", qx{ screen -Q windows }],
+        windows => [split "\x20\x20", $windows],
         start_number => _current_window_number(),
     } => $class;
 }
@@ -17,8 +19,7 @@ sub windows   { $_[0]->{windows}   }
 sub start_number { $_[0]->{start_number} }
 
 sub _current_window_number {
-    my $win = qx{ screen -Q number } 
-        or die "Your screen doesn't support -Q";
+    my $win = qx{ screen -Q number };
     $win =~ /^(\d+)/ or die 'current window number not found';
     return $1;
 }
