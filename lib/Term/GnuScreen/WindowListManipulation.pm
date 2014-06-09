@@ -9,12 +9,12 @@ sub new {
     my $class = shift;
     bless {
         windows => [split "\x20\x20", qx{ screen -Q windows }],
-        start_num => _current_window_number(),
+        start_number => _current_window_number(),
     } => $class;
 }
 
 sub windows   { $_[0]->{windows}   }
-sub start_num { $_[0]->{start_num} }
+sub start_number { $_[0]->{start_number} }
 
 sub _current_window_number {
     my $win = qx{ screen -Q number } 
@@ -41,18 +41,18 @@ sub window_numbers_more_than_current {
 
 sub insert {
     my $self = shift;
-    my $start_num = shift || $self->start_num;
-    my $update_num = $start_num + 1;
+    my $start_number = shift || $self->start_number;
+    my $update_number = $start_number + 1;
     my $window_numbers_more_than_current = $self->window_numbers_more_than_current;
 
-    if ( $window_numbers_more_than_current->[0] > $update_num ) {
-        qx{ screen -X screen $update_num };
+    if ( $window_numbers_more_than_current->[0] > $update_number ) {
+        qx{ screen -X screen $update_number };
         exit;
     }else{
         for my $win_number (reverse @$window_numbers_more_than_current) {
             qx{ screen -X eval 'select $win_number' 'number +1' };
         }
-        qx{ screen -X screen $update_num };
+        qx{ screen -X screen $update_number };
     }
 }
 
@@ -61,12 +61,12 @@ sub compact {
     my @windows = @{$self->windows};
 
     for my $i (0 .. @windows - 1) {
-        my ($num) = $windows[$i] =~ /^(\d+)/;
-        qx{ screen -X eval 'select $num' 'number $i' };
+        my ($number) = $windows[$i] =~ /^(\d+)/;
+        qx{ screen -X eval 'select $number' 'number $i' };
     }
 
-    my $start_num = $self->start_num;
-    qx{ screen -X select $start_num };
+    my $start_number = $self->start_number;
+    qx{ screen -X select $start_number };
 }
 
 
