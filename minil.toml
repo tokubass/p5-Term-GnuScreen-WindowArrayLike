@@ -1,0 +1,6 @@
+name = "Term-GnuScreen-WindowListManipulation"
+# badges = ["travis"]
+authority="cpan:TOKUBASS"
+
+module_maker="ModuleBuildTiny"
+
