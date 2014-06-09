@@ -1,10 +1,13 @@
 # NAME
 
-Term::GnuScreen::WindowListManipulation - It's new $module
+Term::GnuScreen::WindowListManipulation - window list is operated like Array
 
 # SYNOPSIS
 
     use Term::GnuScreen::WindowListManipulation;
+    my $screen = Term::GnuScreen::WindowListManipulation->new;
+    $screen->insert;
+    $screen->compact;
 
 # DESCRIPTION
 
