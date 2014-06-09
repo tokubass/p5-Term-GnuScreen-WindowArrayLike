@@ -38,7 +38,13 @@ sub window_numbers_more_than_current {
     \@window_numbers_more_than_current;
 }
 
+sub push {
+    my $self = shift;
+    $self->windows->[-1] =~ /^(\d+)/ or die 'last window number not found';
 
+    my $pushed_number = $1 + 1;
+    qx{ screen -X screen $pushed_number };
+}
 
 sub insert {
     my $self = shift;
