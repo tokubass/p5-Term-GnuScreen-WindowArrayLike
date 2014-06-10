@@ -15,7 +15,13 @@ sub new {
 }
 
 sub windows   { $_[0]->{windows}   }
-sub start_number { $_[0]->{start_number} }
+sub start_number {
+    $_[0]->{start_number} ||= _current_window_number();
+    if ($_[1]) {
+	$_[0]->{start_number} = $_[1];
+    }
+    return $_[0]->{start_number};
+}
 
 sub _current_window_number {
     my $win = qx{ screen -Q number };
@@ -30,7 +36,7 @@ sub window_numbers_more_than_current {
 
     for my $i (0 .. @windows - 1) {
         my ($num) = $windows[$i] =~ /^(\d+)/;
-        if ($self->start_num < $num) {
+        if ($self->start_number < $num) {
             push @window_numbers_more_than_current,$num;
         }
     }
@@ -47,7 +53,9 @@ sub push {
 
 sub insert {
     my $self = shift;
-    my $start_number = shift || $self->start_number;
+    my $start_number = shift;
+    $self->start_number($start_number);
+
     my $update_number = $start_number + 1;
     my $window_numbers_more_than_current = $self->window_numbers_more_than_current;
 
