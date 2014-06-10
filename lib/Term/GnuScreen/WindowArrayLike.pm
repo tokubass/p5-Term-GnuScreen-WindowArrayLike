@@ -11,7 +11,6 @@ sub new {
 
     bless {
         windows => [split "\x20\x20", $windows],
-        start_number => _current_window_number(),
     } => $class;
 }
 
