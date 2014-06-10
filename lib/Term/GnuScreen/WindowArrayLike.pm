@@ -16,11 +16,15 @@ sub new {
 
 sub windows   { $_[0]->{windows}   }
 sub start_number {
-    $_[0]->{start_number} ||= _current_window_number();
+    my $self = $_[0];
+
     if ($_[1]) {
-	$_[0]->{start_number} = $_[1];
+        $self->{start_number} = $_[1];
+    }elsif ( !defined $self->{start_number} ) {
+        $self->{start_number} = _current_window_number();
     }
-    return $_[0]->{start_number};
+
+    return $self->{start_number};
 }
 
 sub _current_window_number {
@@ -29,18 +33,18 @@ sub _current_window_number {
     return $1;
 }
 
-sub window_numbers_more_than_current {
+sub window_numbers_more_than_start {
     my $self = shift;
-    my @window_numbers_more_than_current;
+    my @window_numbers_more_than_start;
     my @windows = @{$self->windows};
 
     for my $i (0 .. @windows - 1) {
         my ($num) = $windows[$i] =~ /^(\d+)/;
         if ($self->start_number < $num) {
-            push @window_numbers_more_than_current,$num;
+            push @window_numbers_more_than_start,$num;
         }
     }
-    \@window_numbers_more_than_current;
+    \@window_numbers_more_than_start;
 }
 
 sub push {
@@ -53,16 +57,21 @@ sub push {
 
 sub insert {
     my $self = shift;
-    my $start_number = shift;
-    $self->start_number($start_number);
+    my $target_number = shift;
+    my $start_number;
 
-    my $update_number = $start_number + 1;
-    my $window_numbers_more_than_current = $self->window_numbers_more_than_current;
+    if (defined $target_number) {
+        $start_number = $target_number - 1;
+        $self->start_number($start_number);
+    }else{
+        $target_number = ($self->start_number + 1);
+    }
 
-    for my $win_number (reverse @$window_numbers_more_than_current) {
+    for my $win_number (reverse @{$self->window_numbers_more_than_start} ) {
         qx{ screen -X eval 'select $win_number' 'number +1' };
     }
-    qx{ screen -X screen $update_number };
+
+    qx{ screen -X screen $target_number };
 }
 
 sub compact {
