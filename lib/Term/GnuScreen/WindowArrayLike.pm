@@ -1,4 +1,4 @@
-package Term::GnuScreen::WindowListManipulation;
+package Term::GnuScreen::WindowArrayLike;
 use 5.008005;
 use strict;
 use warnings;
@@ -80,19 +80,19 @@ __END__
 
 =head1 NAME
 
-Term::GnuScreen::WindowListManipulation - window list is operated like Array
+Term::GnuScreen::WindowArrayLike - window list is operated like Array
 
 =head1 SYNOPSIS
 
-    use Term::GnuScreen::WindowListManipulation;
-    my $screen = Term::GnuScreen::WindowListManipulation->new;
+    use Term::GnuScreen::WindowArrayLike;
+    my $screen = Term::GnuScreen::WindowArrayLike->new;
     $screen->insert;
     $screen->compact;
 
 
 =head1 DESCRIPTION
 
-Term::GnuScreen::WindowListManipulation is ...
+Term::GnuScreen::WindowArrayLike is ...
 
 =head1 LICENSE
 

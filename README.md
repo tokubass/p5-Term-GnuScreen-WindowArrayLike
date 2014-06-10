@@ -1,17 +1,17 @@
 # NAME
 
-Term::GnuScreen::WindowListManipulation - window list is operated like Array
+Term::GnuScreen::WindowArrayLike - window list is operated like Array
 
 # SYNOPSIS
 
-    use Term::GnuScreen::WindowListManipulation;
-    my $screen = Term::GnuScreen::WindowListManipulation->new;
+    use Term::GnuScreen::WindowArrayLike;
+    my $screen = Term::GnuScreen::WindowArrayLike->new;
     $screen->insert;
     $screen->compact;
 
 # DESCRIPTION
 
-Term::GnuScreen::WindowListManipulation is ...
+Term::GnuScreen::WindowArrayLike is ...
 
 # LICENSE
 

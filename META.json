@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "Term-GnuScreen-WindowListManipulation",
+   "name" : "Term-GnuScreen-WindowArrayLike",
    "no_index" : {
       "directory" : [
          "t",
@@ -52,6 +52,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/tokubass/p5-Term-GnuScreen-WindowArrayLike/issues"
+      },
+      "homepage" : "https://github.com/tokubass/p5-Term-GnuScreen-WindowArrayLike",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/tokubass/p5-Term-GnuScreen-WindowArrayLike.git",
+         "web" : "https://github.com/tokubass/p5-Term-GnuScreen-WindowArrayLike"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:TOKUBASS"
 }
