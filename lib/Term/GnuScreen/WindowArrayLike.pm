@@ -132,6 +132,8 @@ Add window to the end of a list.
 A window is inserted in the given number.
 Before inserting window, as for window number not less than the given number, 1 is added.
 
+The current window number becomes a default value when not giving a number. 
+
 =head2 compact
 
 Reassign sequential numbers.
