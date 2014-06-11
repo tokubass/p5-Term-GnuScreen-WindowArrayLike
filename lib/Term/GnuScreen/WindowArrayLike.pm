@@ -117,6 +117,25 @@ Term::GnuScreen::WindowArrayLike - window list is operated like Array
 
 Term::GnuScreen::WindowArrayLike operates screen window list using Array method.
 
+=head1 METHODS
+
+=head2 new(\%opts)
+
+Constructor.
+
+=head2 push
+
+Add window to the end of a list. 
+
+=head2 insert($window_number)
+
+A window is inserted in the given number.
+Before inserting window, as for window number not less than the given number, 1 is added.
+
+=head2 compact
+
+Reassign sequential numbers.
+
 =head1 LICENSE
 
 Copyright (C) tokubass.
